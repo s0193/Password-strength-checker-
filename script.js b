@@ -1,0 +1,77 @@
+// Wrap in DOMContentLoaded for Acode
+document.addEventListener("DOMContentLoaded", () => {
+  const pass = document.getElementById("password");
+  const bar = document.getElementById("bar");
+  const arrow = document.getElementById("arrow");
+  const strength = document.getElementById("strength");
+  const tips = document.getElementById("tips");
+  const entropyEl = document.getElementById("entropy");
+  const gen = document.getElementById("gen");
+  const genPass = document.getElementById("genPass");
+  const copy = document.getElementById("copy");
+  const checkBtn = document.getElementById("check");
+
+  function getEntropy(pw){
+    let charset=0;
+    if(/[a-z]/.test(pw)) charset+=26;
+    if(/[A-Z]/.test(pw)) charset+=26;
+    if(/[0-9]/.test(pw)) charset+=10;
+    if(/[^A-Za-z0-9]/.test(pw)) charset+=32;
+    return pw.length * Math.log2(charset||1);
+  }
+
+  function evaluatePassword(pw){
+    let score=0, feedback=[];
+    if(pw.length>=12) score+=20; else feedback.push("12+ chars");
+    if(/[A-Z]/.test(pw)) score+=15; else feedback.push("uppercase");
+    if(/[a-z]/.test(pw)) score+=15; else feedback.push("lowercase");
+    if(/[0-9]/.test(pw)) score+=15; else feedback.push("numbers");
+    if(/[^A-Za-z0-9]/.test(pw)) score+=15; else feedback.push("symbols");
+    if(/123|password|qwerty/i.test(pw)) score-=20;
+
+    let color,text;
+    if(score<20){ color="#8B0000"; text="🚨 Not Safe"; }
+    else if(score<40){ color="#FF0000"; text="❌ Unsafe"; }
+    else if(score<60){ color="#FFD700"; text="⚠ Moderate"; }
+    else if(score<80){ color="#ADFF2F"; text="✅ Safe"; }
+    else{ color="#008000"; text="🔐 Very Safe"; }
+
+    return {score,color,text,feedback};
+  }
+
+  function updateMeter(){
+    const pw = pass.value;
+    const res = evaluatePassword(pw);
+    const entropy = getEntropy(pw).toFixed(2);
+
+    bar.style.width = Math.min(res.score,100) + "%";
+    bar.style.background = res.color;
+    arrow.style.left = Math.min(res.score,100) + "%";
+
+    strength.textContent = res.text;
+    tips.textContent = res.feedback.length ? "Add: " + res.feedback.join(", ") : "Perfect password ✔";
+    entropyEl.textContent = `Entropy: ${entropy} bits`;
+  }
+
+  // ✅ Real-time typing
+  pass.addEventListener("input", updateMeter);
+
+  // ✅ Check button
+  checkBtn.addEventListener("click", updateMeter);
+
+  // ✅ Generate password
+  gen.addEventListener("click", () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}";
+    let pw="";
+    for(let i=0;i<16;i++) pw+=chars[Math.floor(Math.random()*chars.length)];
+    genPass.value=pw;
+  });
+
+  // ✅ Copy password
+  copy.addEventListener("click", () => {
+    if(genPass.value){
+      navigator.clipboard.writeText(genPass.value);
+      alert("Copied securely!");
+    }
+  });
+});

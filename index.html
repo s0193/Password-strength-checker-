@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Password Analyzer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🔐 Cyber Password Analyzer</h1>
+  <p class="subtitle">Client-Side | Zero Storage | Secure</p>
+
+  <input type="password" id="password" placeholder="Enter your password">
+  <button id="check">🛡️ Check Strength</button>
+
+  <div class="meter">
+    <div class="meter-bar" id="bar"></div>
+    <div class="arrow" id="arrow">▲</div>
+  </div>
+
+  <div id="strength"></div>
+  <div id="entropy"></div>
+  <div id="tips"></div>
+
+  <button id="gen">⚡ Generate Strong Password</button>
+  <input id="genPass" readonly placeholder="Generated password">
+  <button id="copy">📋 Copy</button>
+
+  <p class="footer">🔒 Passwords never leave your device • Safe & private</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

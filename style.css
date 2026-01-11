@@ -1,0 +1,114 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+    url("https://images.unsplash.com/photo-1611321068714-bd22f2c36dcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920") no-repeat center center fixed;
+  background-size: cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Orbitron', sans-serif;
+  color:#00f2ff;
+}
+
+.container {
+  width:420px;
+  padding:35px;
+  border-radius:20px;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(0,255,255,0.2);
+  box-shadow:0 0 30px rgba(0,242,255,0.5);
+  text-align:center;
+}
+
+h1 {
+  font-size:26px;
+  text-shadow:0 0 8px #00f2ff,0 0 20px #0ff;
+}
+
+.subtitle {
+  font-size:12px;
+  color:#cbd5e1;
+  margin-bottom:20px;
+  font-family:'Roboto Mono', monospace;
+}
+
+input[type="password"], #genPass {
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  background:rgba(0,0,0,0.4);
+  color:#00f2ff;
+  font-family:'Roboto Mono', monospace;
+  letter-spacing:1px;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#00f2ff,#0077ff);
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(0,242,255,0.6);
+  transition:0.3s;
+  font-family:'Orbitron', sans-serif;
+}
+button:hover{transform:scale(1.05);}
+
+.meter {
+  position:relative;
+  height:25px;
+  width:100%;
+  background:rgba(255,255,255,0.1);
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.meter-bar {
+  height:100%;
+  width:0%;
+  border-radius:12px;
+  transition:0.5s;
+  box-shadow:0 0 10px currentColor;
+}
+
+.arrow {
+  position:absolute;
+  top:-20px;
+  left:0%;
+  font-size:18px;
+  color:#fff;
+  transition:left 0.5s ease;
+}
+
+#strength {
+  margin-top:10px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+#entropy, #tips {
+  margin-top:6px;
+  font-size:13px;
+  color:#e5e7eb;
+}
+
+.footer {
+  font-size:11px;
+  margin-top:15px;
+  color:#94a3b8;
+}
+
+@media screen and (max-width:450px){
+  .container { width:90%; padding:25px; }
+}
